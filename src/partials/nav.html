@@ -1,0 +1,18 @@
+<nav class="nav">
+  <button class="nav__btn" id="js-nav-toggle-btn" type="button">
+    <svg class="o-icon" aria-hidden="true">
+      <use xlink:href="sprites/icons.svg#hamburger"></use>
+    </svg>
+    Menu
+  </button>
+
+  <ul class="nav__list o-list-bare" id="js-nav-toggle-menu">
+    {% for item in nav %}
+      <li class="nav__item">
+        <a class="nav__link" href="{{ item.url }}">
+          {{ item.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

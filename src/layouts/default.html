@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ name }}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="icon" href="img/favicon.ico">
+    {% block css %}
+      <link rel="stylesheet" href="css/main.min.css">
+    {% endblock %}
+    <script>
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
+    </script>
+  </head>
+  <body>
+    {% include '../partials/header.html' %}
+
+    {% block body %}{% endblock %}
+
+    {% include '../partials/footer.html' %}
+
+    {% block js %}
+      <script src="js/main.min.js" async defer></script>
+    {% endblock %}
+
+    <script>
+      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+      ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+  </body>
+</html>
