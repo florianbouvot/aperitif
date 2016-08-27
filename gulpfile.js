@@ -145,18 +145,20 @@ gulp.task('watch', function() {
 
 
 
-// Default task : clean and build
+// Default Task
 gulp.task('default',
-  gulp.series(
-    'clean',
-    gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts')
-  )
+  gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts')
 );
 
-// Dev task : clean, build, serve and watch
+// Dev task : build, serve and watch
 gulp.task('dev',
   gulp.series(
     'default',
     gulp.parallel('serve', 'watch')
   )
+);
+
+// Build task : clean and build
+gulp.task('default',
+  gulp.series('clean', 'default')
 );
