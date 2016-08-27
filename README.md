@@ -34,6 +34,18 @@ Build current project, ready for test or deployment.
 $ gulp build
 ```
 
+##### Others commands
+
+* `gulp css`: Sass, Autoprefixer, CSSnano
+* `gulp js`: Concat and Uglify
+* `gulp html`: Load data from `data.json` and compile Twig templates
+* `gulp images`: Compression with imagemin
+* `gulp sprites`: Auto-generated SVG Sprite from `.svg` files
+* `gulp fonts`: Copy fonts files
+* `gulp clean`: Delete `dist` folder
+* `gulp serve`: BrowserSync server
+* `gulp watch`: Watch source files
+
 ## License
 
 MIT © [Florian Bouvot](https://github.com/florianbouvot)
