@@ -1,0 +1,25 @@
+{
+  "name": "Nom du project",
+  "nav": [
+    {
+      "title": "Accueil",
+      "url": "index.html"
+    },
+    {
+      "title": "Actualités",
+      "url": "blog.html"
+    },
+    {
+      "title": "Services",
+      "url": "service.html"
+    },
+    {
+      "title": "A propos",
+      "url": "about.html"
+    },
+    {
+      "title": "Contact",
+      "url": "contact.html"
+    }
+  ]
+}
