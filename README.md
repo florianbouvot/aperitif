@@ -4,7 +4,7 @@ Aperitif is a boilerplate for web projects.
 
 * Sass support
 * Compile Twig templates (+ data)
-* Create SVG sprite
+* Create SVG icons sprite
 * Minify and concatenate CSS, JS and images
 * Server with live-reloading and cross-device synchronization
 
@@ -40,7 +40,7 @@ $ gulp build
 * `gulp js`: Concat and Uglify
 * `gulp html`: Load data from `data.json` and compile Twig templates
 * `gulp images`: Compression with imagemin
-* `gulp sprites`: Auto-generated SVG Sprite from `.svg` files
+* `gulp sprites`: Auto-generated SVG sprite from `.svg` icons
 * `gulp fonts`: Copy fonts files
 * `gulp clean`: Delete `dist` folder
 * `gulp serve`: BrowserSync server
