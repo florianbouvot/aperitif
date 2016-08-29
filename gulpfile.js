@@ -159,6 +159,6 @@ gulp.task('dev',
 );
 
 // Build task : clean and build
-gulp.task('default',
+gulp.task('build',
   gulp.series('clean', 'default')
 );
