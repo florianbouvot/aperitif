@@ -7,6 +7,7 @@ var concat = require('gulp-concat');
 var cssnano = require('cssnano');
 var data = require('gulp-data');
 var del = require('del');
+var fs = require('fs');
 var imagemin = require('gulp-imagemin');
 var plumber = require('gulp-plumber');
 var postcss = require('gulp-postcss');
@@ -20,11 +21,17 @@ var uglify = require('gulp-uglify');
 
 
 
-// BrowserSync reload function
+// BrowserSync reload
 function reload(cb) {
   browserSync.reload();
   cb();
 }
+
+// Get data from JSON
+function getData() {
+  var data = JSON.parse(fs.readFileSync('./src/data.json', 'utf8'));
+  return data;
+};
 
 
 
@@ -78,9 +85,7 @@ gulp.task('js', function() {
 gulp.task('html', function() {
   return gulp.src('src/*.html')
     .pipe(plumber())
-    .pipe(data(function(file) {
-      return require('./src/data.json');
-    }))
+    .pipe(data(getData()))
     .pipe(twig())
     .pipe(gulp.dest('dist'));
 });
@@ -134,7 +139,7 @@ gulp.task('serve', function() {
 gulp.task('watch', function() {
 	gulp.watch('src/css/**/*.scss', gulp.series('css'));
 	gulp.watch('src/js/**/*.js', gulp.series('js', reload));
-	gulp.watch('src/**/*.html', gulp.series('html', reload));
+	gulp.watch(['src/**/*.html', 'src/**/*.json'], gulp.series('html', reload));
 	gulp.watch('src/img/**/*', gulp.series('images'));
   gulp.watch('src/sprites/**/*.svg', gulp.series('sprites'));
 	gulp.watch('src/fonts/**/*', gulp.series('fonts'));
