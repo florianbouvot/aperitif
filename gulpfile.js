@@ -141,7 +141,7 @@ gulp.task('watch', function() {
 	gulp.watch('src/js/**/*.js', gulp.series('js', reload));
 	gulp.watch(['src/**/*.html', 'src/**/*.json'], gulp.series('html', reload));
 	gulp.watch('src/img/**/*', gulp.series('images'));
-  gulp.watch('src/sprites/**/*.svg', gulp.series('sprites'));
+  gulp.watch('src/icons/**/*.svg', gulp.series('sprites'));
 	gulp.watch('src/fonts/**/*', gulp.series('fonts'));
 });
 
