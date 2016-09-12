@@ -125,9 +125,8 @@ gulp.task('clean', function() {
 // Serve task
 gulp.task('serve', function() {
   browserSync.init({
-    server: {
-      baseDir: 'dist'
-    }
+    notify: false,
+    server: 'dist'
   });
 });
 
