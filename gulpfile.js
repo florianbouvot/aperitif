@@ -98,7 +98,7 @@ gulp.task('images', function() {
 
 // Sprites Task
 gulp.task('sprites', function() {
-  return gulp.src('src/sprites/**/*.svg')
+  return gulp.src('src/icons/**/*.svg')
     .pipe(svgSprite({
       mode: {
         symbol: {
