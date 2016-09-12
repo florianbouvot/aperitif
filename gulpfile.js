@@ -56,7 +56,7 @@ gulp.task('css', function() {
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(processors))
-    .pipe(rename({ suffix: ".min" }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist/css'))
     .pipe(browserSync.stream());
 });
@@ -126,7 +126,7 @@ gulp.task('clean', function() {
 gulp.task('serve', function() {
   browserSync.init({
     server: {
-      baseDir: "dist"
+      baseDir: 'dist'
     }
   });
 });
