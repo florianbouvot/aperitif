@@ -41,7 +41,6 @@ $ gulp build
 * `gulp html`: Load data from `data.json` and compile Twig templates
 * `gulp images`: Compression with imagemin
 * `gulp sprites`: Auto-generated SVG sprite from `.svg` icons
-* `gulp fonts`: Copy fonts files
 * `gulp clean`: Delete `dist` folder
 * `gulp serve`: BrowserSync server
 * `gulp watch`: Watch source files
