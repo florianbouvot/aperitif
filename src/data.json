@@ -22,5 +22,15 @@
       "title": "Contact",
       "url": "contact.html"
     }
+  ],
+  "footerLinks": [
+    {
+      "title": "Mentions légales",
+      "url": "base.html"
+    },
+    {
+      "title": "Plan du site",
+      "url": "base.html"
+    }
   ]
 }

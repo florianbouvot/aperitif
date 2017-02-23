@@ -1,10 +1,18 @@
 <footer class="footer" role="contentinfo">
-  <a href="#">Mentions légales</a>
-  <a href="#">Plan du site</a>
-
-  <a href="http://www.twee-b.fr/" target="_blank" aria-label="Agence twee b création de site internet à Chalon-sur-Saône">
-    <svg class="o-icon" aria-hidden="true">
-      <use xlink:href="sprites/icons.svg#tweeb"></use>
-    </svg>
-  </a>
+  <ul>
+    {% for item in footerLinks %}
+      <li>
+        <a href="{{ item.url }}">
+          {{ item.title }}
+        </a>
+      </li>
+    {% endfor %}
+    <li>
+      <a href="http://www.twee-b.fr/" target="_blank" aria-label="Agence twee b création de site internet à Chalon-sur-Saône">
+        <svg class="o-icon" aria-hidden="true">
+          <use xlink:href="sprites/icons.svg#tweeb"></use>
+        </svg>
+      </a>
+    </li>
+  </ul>
 </footer>
