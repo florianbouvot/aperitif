@@ -44,13 +44,12 @@ gulp.task('css', function() {
       browsers: [
         '> 1%',
         'last 2 versions',
-        'firefox ESR',
-        'ie >= 10',
-        'edge >= 12',
-        'safari >= 7',
+        'ff ESR',
+        'ie >= 11',
         'ios >= 7',
-        'android >= 4.4',
-        'ie_mob >= 10'
+        'safari >= 7',
+        'ie_mob >= 10',
+        'android >= 4.4'
       ]
     }),
     cssnano({
