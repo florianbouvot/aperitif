@@ -115,13 +115,6 @@ gulp.task('sprites', function() {
     .pipe(gulp.dest('dist/sprites'));
 });
 
-// Fonts Task
-gulp.task('fonts', function() {
-  return gulp.src('src/fonts/**/*')
-    .pipe(changed('dist/fonts'))
-    .pipe(gulp.dest('dist/fonts'));
-});
-
 // Clean Task
 gulp.task('clean', function() {
   return del(['dist']);
@@ -142,7 +135,6 @@ gulp.task('watch', function() {
 	gulp.watch(['src/**/*.html', 'src/**/*.json'], gulp.series('html', reload));
 	gulp.watch('src/img/**/*', gulp.series('images'));
   gulp.watch('src/icons/**/*.svg', gulp.series('sprites'));
-	gulp.watch('src/fonts/**/*', gulp.series('fonts'));
 });
 
 
@@ -151,7 +143,7 @@ gulp.task('watch', function() {
 
 // Default Task
 gulp.task('default',
-  gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts')
+  gulp.parallel('css', 'js', 'html', 'images', 'sprites')
 );
 
 // Dev task : build, serve and watch
