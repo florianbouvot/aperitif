@@ -16,7 +16,19 @@ Aperitif is a boilerplate for web projects.
 
 ### 2. Install dependencies
 
-Install dependencies using **npm** `$ npm install` or **yarn** `$ yarn install`.
+**npm** 
+
+```
+$ npm install
+``` 
+
+or 
+
+**yarn** 
+
+```
+$ yarn install
+```
 
 ### 3. Run gulp
 
