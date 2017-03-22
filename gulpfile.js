@@ -53,7 +53,7 @@ gulp.task('css', function() {
     })
   ];
 
-  return gulp.src('src/css/**/*.scss')
+  return gulp.src('src/css/*.scss')
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(processors))
@@ -67,7 +67,7 @@ gulp.task('js', function() {
   return gulp.src([
       'node_modules/svg4everybody/dist/svg4everybody.min.js',
       'node_modules/jquery/dist/jquery.slim.min.js',
-      'src/js/**/*.js'
+      'src/js/*.js'
     ])
     .pipe(plumber())
     .pipe(concat('main.min.js'))
@@ -89,8 +89,8 @@ gulp.task('images', function() {
   return gulp.src('src/img/**/*')
     .pipe(changed('dist/img'))
     .pipe(imagemin({
-      progressive: true,
-      interlaced: true
+      interlaced: true,
+      progressive: true
     }))
     .pipe(gulp.dest('dist/img'));
 });
