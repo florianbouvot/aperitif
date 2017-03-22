@@ -1,14 +1,14 @@
 # https://help.github.com/articles/ignoring-files/
 
+# macOS
+*.DS_Store
+
 # Node
-node_modules
+node_modules/
 
 # Sass
 .sass-cache/
 *.css.map
-
-# OSX
-*.DS_Store
 
 # Project
 dist/
