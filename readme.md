@@ -20,6 +20,12 @@ Aperitif is a boilerplate for web projects.
 $ npm install
 ```
 
+or 
+
+```
+$ yarn install
+```
+
 ### 3. Run gulp
 
 Serve, watch for changes and automatically refresh across devices.
