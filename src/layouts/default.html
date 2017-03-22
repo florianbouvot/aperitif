@@ -4,6 +4,7 @@
   {% include '../partials/head.html' %}
 
   <body>
+
     {% include '../partials/header.html' %}
 
     {% block content %}{% endblock %}
@@ -11,7 +12,7 @@
     {% include '../partials/footer.html' %}
 
     {% block js %}
-      <script src="js/main.min.js" defer></script>
+      <script src="js/main.min.js" async defer></script>
     {% endblock %}
 
     <script>
@@ -19,5 +20,6 @@
       ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
     </script>
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
   </body>
 </html>
