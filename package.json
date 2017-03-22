@@ -34,7 +34,7 @@
     "type": "git",
     "url": "git+https://github.com/florianbouvot/aperitif.git"
   },
-  "author": "Florian Bouvot",
+  "author": "Florian Bouvot <florian.bouvot+github@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/florianbouvot/aperitif/issues"
