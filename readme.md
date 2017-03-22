@@ -16,15 +16,11 @@ Aperitif is a boilerplate for web projects.
 
 ### 2. Install dependencies
 
-**npm** 
-
 ```
 $ npm install
 ``` 
 
-or 
-
-**yarn** 
+or
 
 ```
 $ yarn install
