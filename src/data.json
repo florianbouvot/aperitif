@@ -25,11 +25,11 @@
   ],
   "footerLinks": [
     {
-      "title": "Mentions légales",
+      "title": "Legal notice",
       "url": "base.html"
     },
     {
-      "title": "Plan du site",
+      "title": "Sitemap",
       "url": "base.html"
     }
   ]
