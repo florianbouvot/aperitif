@@ -77,7 +77,7 @@ gulp.task('js', function() {
 
 // HTML Task
 gulp.task('html', function() {
-  return gulp.src('src/*.html')
+  return gulp.src('src/*.{html,twig}')
     .pipe(plumber())
     .pipe(data(getData()))
     .pipe(twig())
@@ -126,7 +126,7 @@ gulp.task('serve', function() {
 gulp.task('watch', function() {
 	gulp.watch('src/css/**/*.scss', gulp.series('css'));
 	gulp.watch('src/js/**/*.js', gulp.series('js', reload));
-	gulp.watch(['src/**/*.html', 'src/**/*.json'], gulp.series('html', reload));
+	gulp.watch(['src/**/*.{html,twig}', 'src/**/*.json'], gulp.series('html', reload));
 	gulp.watch('src/img/**/*', gulp.series('images'));
   gulp.watch('src/icons/**/*.svg', gulp.series('sprites'));
 });
