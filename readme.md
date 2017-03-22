@@ -2,11 +2,11 @@
 
 Aperitif is a boilerplate for web projects.
 
-* Sass support
-* Compile Twig templates (+ data)
+* Compile Sass into CSS
+* Compile Twig templates (+ json data)
+* Minify and concatenate CSS, JS and optimize images
 * Create SVG icons sprite
-* Minify and concatenate CSS, JS and images
-* Server with live-reloading and cross-device synchronization
+* Built-in HTTP Server with live-reload and cross-device synchronization
 
 ## Getting Started
 
@@ -20,12 +20,18 @@ Aperitif is a boilerplate for web projects.
 $ npm install
 ```
 
+or 
+
+```
+$ yarn install
+```
+
 ### 3. Run gulp
 
 Serve, watch for changes and automatically refresh across devices.
 
 ```
-$ gulp dev
+$ gulp
 ```
 
 Build current project, ready for test or deployment.
@@ -41,7 +47,6 @@ $ gulp build
 * `gulp html`: Load data from `data.json` and compile Twig templates
 * `gulp images`: Compression with imagemin
 * `gulp sprites`: Auto-generated SVG sprite from `.svg` icons
-* `gulp fonts`: Copy fonts files
 * `gulp clean`: Delete `dist` folder
 * `gulp serve`: BrowserSync server
 * `gulp watch`: Watch source files

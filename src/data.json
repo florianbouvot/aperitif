@@ -1,12 +1,13 @@
 {
-  "name": "Nom du project",
+  "title": "Project name",
+  "description": "Project description for Google seach results",
   "nav": [
     {
-      "title": "Accueil",
+      "title": "Home",
       "url": "index.html"
     },
     {
-      "title": "Actualités",
+      "title": "Blog",
       "url": "blog.html"
     },
     {
@@ -14,12 +15,22 @@
       "url": "service.html"
     },
     {
-      "title": "A propos",
+      "title": "About",
       "url": "about.html"
     },
     {
       "title": "Contact",
       "url": "contact.html"
+    }
+  ],
+  "footerLinks": [
+    {
+      "title": "Legal notice",
+      "url": "base.html"
+    },
+    {
+      "title": "Sitemap",
+      "url": "base.html"
     }
   ]
 }
