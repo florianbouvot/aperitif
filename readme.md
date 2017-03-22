@@ -12,15 +12,15 @@ Aperitif is a boilerplate for web projects.
 
 *Prerequisites : [Node.js](https://nodejs.org/) and [Gulp](http://gulpjs.com/)*
 
-### 1. Download or clone this repository
+### 1. Clone or download this repository
 
 ### 2. Install dependencies
 
 ```
 $ npm install
-```
+``` 
 
-or 
+or
 
 ```
 $ yarn install

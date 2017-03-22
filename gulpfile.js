@@ -32,7 +32,7 @@ function getData() {
 
 
 
-// CSS Task
+// CSS task
 gulp.task('css', function() {
   var processors = [
     autoprefixer({
@@ -62,7 +62,7 @@ gulp.task('css', function() {
     .pipe(reload({ stream: true }));
 });
 
-// JS Task
+// JS task
 gulp.task('js', function() {
   return gulp.src([
       'node_modules/svg4everybody/dist/svg4everybody.min.js',
@@ -75,7 +75,7 @@ gulp.task('js', function() {
     .pipe(gulp.dest('dist/js'));
 });
 
-// HTML Task
+// HTML task
 gulp.task('html', function() {
   return gulp.src('src/*.{html,twig}')
     .pipe(plumber())
@@ -84,7 +84,7 @@ gulp.task('html', function() {
     .pipe(gulp.dest('dist'));
 });
 
-// Images Task
+// Images task
 gulp.task('images', function() {
   return gulp.src('src/img/**/*')
     .pipe(changed('dist/img'))
@@ -95,7 +95,7 @@ gulp.task('images', function() {
     .pipe(gulp.dest('dist/img'));
 });
 
-// Sprites Task
+// Sprites task
 gulp.task('sprites', function() {
   return gulp.src('src/icons/**/*.svg')
     .pipe(svgSprite({
@@ -109,7 +109,7 @@ gulp.task('sprites', function() {
     .pipe(gulp.dest('dist/sprites'));
 });
 
-// Clean Task
+// Clean task
 gulp.task('clean', function(done) {
   del(['dist'], done);
 });
@@ -135,7 +135,7 @@ gulp.task('watch', function() {
 
 
 
-// Default Task
+// Default task
 gulp.task('default',
   gulp.series(
     gulp.parallel('css', 'js', 'html', 'images', 'sprites'),
