@@ -142,18 +142,16 @@ gulp.task('watch', function() {
 
 // Default Task
 gulp.task('default',
-  gulp.parallel('css', 'js', 'html', 'images', 'sprites')
-);
-
-// Dev task : build, serve and watch
-gulp.task('dev',
   gulp.series(
-    'default',
+    gulp.parallel('css', 'js', 'html', 'images', 'sprites'),
     gulp.parallel('serve', 'watch')
   )
 );
 
-// Build task : clean and build
+// Build task
 gulp.task('build',
-  gulp.series('clean', 'default')
+  gulp.series(
+    'clean',
+    gulp.parallel('css', 'js', 'html', 'images', 'sprites')
+  )
 );
