@@ -1,7 +1,7 @@
 // Requires
 var gulp = require('gulp');
 var autoprefixer = require('autoprefixer');
-var browserSync = require('browser-sync');
+var browserSync = require('browser-sync').create();
 var changed = require('gulp-changed');
 var concat = require('gulp-concat');
 var cssnano = require('cssnano');
@@ -16,11 +16,16 @@ var sass = require('gulp-sass');
 var svgSprite = require('gulp-svg-sprite');
 var twig = require('gulp-twig');
 var uglify = require('gulp-uglify');
-var reload = browserSync.reload;
 
 
 
 
+
+// BrowserSync reload
+function reload(done) {
+  browserSync.reload();
+  done();
+};
 
 // Get data from JSON
 function getData() {
@@ -59,7 +64,7 @@ gulp.task('css', function() {
     .pipe(postcss(processors))
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('dist/css'))
-    .pipe(reload({ stream: true }));
+    .pipe(browserSync.stream());
 });
 
 // JS task
@@ -116,7 +121,7 @@ gulp.task('clean', function(done) {
 
 // Serve task
 gulp.task('serve', function() {
-  browserSync({
+  browserSync.init({
     notify: false,
     server: 'dist'
   });
