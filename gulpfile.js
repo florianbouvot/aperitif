@@ -40,18 +40,7 @@ function getData() {
 // CSS task
 gulp.task('css', function() {
   var processors = [
-    autoprefixer({
-      browsers: [
-        '> 1%',
-        'last 2 versions',
-        'ff ESR',
-        'ie >= 11',
-        'ios >= 7',
-        'safari >= 7',
-        'ie_mob >= 10',
-        'android >= 4.4'
-      ]
-    }),
+    autoprefixer(),
     cssnano({
       autoprefixer: false,
       safe: true
