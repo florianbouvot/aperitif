@@ -104,8 +104,8 @@ gulp.task('sprites', function() {
 });
 
 // Clean task
-gulp.task('clean', function(done) {
-  del(['dist'], done);
+gulp.task('clean', function() {
+  return del(['dist']);
 });
 
 // Serve task
