@@ -5,10 +5,10 @@
   "main": "gulpfile.js",
   "dependencies": {
     "jquery": "^3.2.1",
-    "svg4everybody": "^2.1.7"
+    "svg4everybody": "^2.1.8"
   },
   "devDependencies": {
-    "autoprefixer": "^7.0.0",
+    "autoprefixer": "^7.0.1",
     "browser-sync": "^2.18.8",
     "cssnano": "^3.10.0",
     "del": "^2.2.2",
