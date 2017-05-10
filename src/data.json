@@ -1,13 +1,13 @@
 {
-  "title": "Project name",
-  "description": "Project description for Google seach results",
+  "title": "Nom du projet",
+  "description": "Description du projet",
   "nav": [
     {
-      "title": "Home",
+      "title": "Accueil",
       "url": "index.html"
     },
     {
-      "title": "Blog",
+      "title": "Actualités",
       "url": "blog.html"
     },
     {
@@ -15,7 +15,7 @@
       "url": "service.html"
     },
     {
-      "title": "About",
+      "title": "A propos",
       "url": "about.html"
     },
     {
@@ -25,11 +25,11 @@
   ],
   "footerLinks": [
     {
-      "title": "Legal notice",
+      "title": "Mentions légales",
       "url": "base.html"
     },
     {
-      "title": "Sitemap",
+      "title": "Plan du site",
       "url": "base.html"
     }
   ]
