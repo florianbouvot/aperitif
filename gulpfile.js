@@ -102,6 +102,13 @@ gulp.task('sprites', function() {
     .pipe(gulp.dest('dist/sprites'));
 });
 
+// Fonts task
+gulp.task('fonts', function() {
+  return gulp.src('src/fonts/**/*')
+    .pipe(changed('dist/fonts'))
+    .pipe(gulp.dest('dist/fonts'));
+})
+
 // Clean task
 gulp.task('clean', function() {
   return del(['dist']);
@@ -122,6 +129,7 @@ gulp.task('watch', function() {
 	gulp.watch(['src/**/*.{html,twig}', 'src/**/*.json'], gulp.series('html', reload));
 	gulp.watch('src/img/**/*', gulp.series('images'));
   gulp.watch('src/icons/**/*.svg', gulp.series('sprites'));
+  gulp.watch('src/fonts/**/*', gulp.series('fonts'))
 });
 
 
@@ -131,7 +139,7 @@ gulp.task('watch', function() {
 // Default task
 gulp.task('default',
   gulp.series(
-    gulp.parallel('css', 'js', 'html', 'images', 'sprites'),
+    gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts'),
     gulp.parallel('serve', 'watch')
   )
 );
@@ -140,6 +148,6 @@ gulp.task('default',
 gulp.task('build',
   gulp.series(
     'clean',
-    gulp.parallel('css', 'js', 'html', 'images', 'sprites')
+    gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts')
   )
 );
