@@ -42,8 +42,7 @@ gulp.task('css', function() {
   var processors = [
     autoprefixer(),
     cssnano({
-      autoprefixer: false,
-      safe: true
+      preset: 'default'
     })
   ];
 
@@ -61,7 +60,7 @@ gulp.task('js', function() {
   return gulp.src([
       'node_modules/svg4everybody/dist/svg4everybody.min.js',
       'node_modules/jquery/dist/jquery.slim.min.js',
-      'src/js/*.js'
+      'src/js/*.js',
     ])
     .pipe(plumber())
     .pipe(concat('main.min.js'))
