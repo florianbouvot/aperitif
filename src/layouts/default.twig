@@ -1,15 +1,16 @@
 <!doctype html>
 <html class="no-js" lang="fr">
 
-  {% include "../partials/head.html" %}
-
+  {% block head %}
+    {% include "../partials/head.twig" %}
+  {% endblock %}
   <body>
 
-    {% include "../partials/header.html" %}
+    {% include "../partials/header.twig" %}
 
     {% block content %}{% endblock %}
 
-    {% include "../partials/footer.html" %}
+    {% include "../partials/footer.twig" %}
 
     {% block js %}
       <script src="js/main.min.js" async defer></script>
