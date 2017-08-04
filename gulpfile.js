@@ -46,7 +46,7 @@ gulp.task('css', function() {
     })
   ];
 
-  return gulp.src('src/css/*.scss')
+  return gulp.src('src/css/main.scss')
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(processors))
@@ -60,7 +60,7 @@ gulp.task('js', function() {
   return gulp.src([
       'node_modules/svg4everybody/dist/svg4everybody.min.js',
       'node_modules/jquery/dist/jquery.slim.min.js',
-      'src/js/*.js',
+      'src/js/main.js'
     ])
     .pipe(plumber())
     .pipe(concat('main.min.js'))
