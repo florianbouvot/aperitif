@@ -1,6 +1,6 @@
 {
   "name": "aperitif",
-  "version": "2.2.1",
+  "version": "1.0.0",
   "description": "A boilerplate for web projects",
   "main": "gulpfile.js",
   "dependencies": {
@@ -31,9 +31,9 @@
     "last 2 versions"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
-    "build": "gulp build"
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
