@@ -59,7 +59,7 @@
       "css": "./dist/css/",
       "js": "./dist/js/",
       "img": "./dist/img/",
-      "sprites": "./dist/icons/",
+      "sprites": "./dist/sprites/",
       "fonts": "./dist/fonts/"
     }
   },
