@@ -43,5 +43,47 @@
   "bugs": {
     "url": "https://github.com/florianbouvot/aperitif/issues"
   },
-  "homepage": "https://github.com/florianbouvot/aperitif#readme"
+  "homepage": "https://github.com/florianbouvot/aperitif#readme",
+  "paths": {
+    "src": {
+      "base": "./src/",
+      "css": "./src/css/",
+      "js": "./src/js/",
+      "img": "./src/img/",
+      "sprites": "./src/icons/",
+      "fonts": "./src/fonts/"
+    },
+    "dist": {
+      "base": "./dist/",
+      "css": "./dist/css/",
+      "js": "./dist/js/",
+      "img": "./dist/img/",
+      "sprites": "./dist/icons/",
+      "fonts": "./dist/fonts/"
+    }
+  },
+  "vars": {
+    "cssName": "main.scss",
+    "jsName": "main.min.js",
+    "spriteName": "icons.svg",
+    "dataName": "data.json"
+  },
+  "globs": {
+    "js": [
+      "./node_modules/svg4everybody/dist/svg4everybody.min.js",
+      "./node_modules/jquery/dist/jquery.slim.min.js",
+      "./src/js/main.js"
+    ],
+    "html": "./src/*.{html,twig}",
+    "img": "./src/img/**/*",
+    "sprites": "./src/icons/**/*.svg",
+    "fonts": "./src/fonts/**/*.{eot,ttf,woff,woff2}",
+    "clean": [
+      "dist/**",
+      "!dist"
+    ]
+  },
+  "urls": {
+    "local": "./dist/"
+  }
 }
