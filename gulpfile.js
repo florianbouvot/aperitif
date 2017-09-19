@@ -127,8 +127,8 @@ gulp.task('watch', function() {
       pkg.paths.src.base + pkg.vars.dataName
     ], gulp.series('html', reload));
 	gulp.watch(pkg.paths.src.img + '**/*', gulp.series('images'));
-  gulp.watch(pkg.paths.sprites + '**/*.svg', gulp.series('sprites'));
-  gulp.watch(pkg.paths.fonts + '**/*', gulp.series('fonts'))
+  gulp.watch(pkg.paths.src.sprites + '**/*.svg', gulp.series('sprites'));
+  gulp.watch(pkg.paths.src.fonts + '**/*', gulp.series('fonts'))
 });
 
 
