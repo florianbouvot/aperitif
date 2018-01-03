@@ -78,10 +78,10 @@ gulp.task('html', function() {
 gulp.task('images', function() {
   return gulp.src(pkg.globs.img)
     .pipe(changed(pkg.paths.dist.img))
-    .pipe(imagemin({
-      interlaced: true,
-      progressive: true
-    }))
+    .pipe(imagemin([
+      imagemin.gifsicle({interlaced: true}),
+      imagemin.jpegtran({progressive: true})
+    ]))
     .pipe(gulp.dest(pkg.paths.dist.img));
 });
 
