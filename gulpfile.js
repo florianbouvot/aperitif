@@ -14,6 +14,7 @@ var plumber = require('gulp-plumber');
 var postcss = require('gulp-postcss');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
+var size = require('gulp-size');
 var svgSprite = require('gulp-svg-sprite');
 var twig = require('gulp-twig');
 var uglify = require('gulp-uglify');
@@ -52,6 +53,7 @@ gulp.task('css', function() {
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(rename({ suffix: '.min' }))
+    .pipe(size({ gzip: true, showFiles: true }))
     .pipe(gulp.dest(pkg.paths.dist.css))
     .pipe(browserSync.stream());
 });
@@ -62,6 +64,7 @@ gulp.task('js', function() {
     .pipe(plumber())
     .pipe(concat(pkg.vars.jsName))
     .pipe(uglify())
+    .pipe(size({ gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.js));
 });
 
@@ -82,6 +85,7 @@ gulp.task('images', function() {
       imagemin.gifsicle({interlaced: true}),
       imagemin.jpegtran({progressive: true})
     ]))
+    .pipe(size({ gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.img));
 });
 
@@ -96,6 +100,7 @@ gulp.task('sprites', function() {
         }
       }
     }))
+    .pipe(size({ gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.sprites));
 });
 
@@ -103,6 +108,7 @@ gulp.task('sprites', function() {
 gulp.task('fonts', function() {
   return gulp.src(pkg.paths.src.fonts + '**/*.{eot,ttf,woff,woff2}')
     .pipe(changed(pkg.paths.dist.fonts))
+    .pipe(size({ gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.fonts));
 })
 
