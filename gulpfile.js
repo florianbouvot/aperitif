@@ -47,7 +47,7 @@ gulp.task('css', function() {
     })
   ];
 
-  return gulp.src(pkg.paths.src.css + pkg.vars.cssName)
+  return gulp.src(pkg.paths.src.css)
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(processors))

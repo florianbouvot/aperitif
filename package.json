@@ -64,7 +64,6 @@
     }
   },
   "vars": {
-    "cssName": "main.scss",
     "jsName": "main.min.js",
     "spriteName": "icons.svg",
     "dataName": "data.json"
