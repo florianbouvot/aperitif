@@ -47,7 +47,7 @@ gulp.task('css', function() {
     })
   ];
 
-  return gulp.src(pkg.paths.src.css)
+  return gulp.src(pkg.paths.src.css + '**/*.scss')
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(processors))
@@ -67,16 +67,16 @@ gulp.task('js', function() {
 
 // HTML task
 gulp.task('html', function() {
-  return gulp.src(pkg.globs.html)
+  return gulp.src(pkg.paths.src.html + '*.{html,twig}')
     .pipe(plumber())
     .pipe(data(getData()))
     .pipe(twig())
-    .pipe(gulp.dest(pkg.paths.dist.base));
+    .pipe(gulp.dest(pkg.paths.dist.html));
 });
 
 // Images task
 gulp.task('images', function() {
-  return gulp.src(pkg.globs.img)
+  return gulp.src(pkg.paths.src.img + '**/*.{png,jpg,jpeg,gif,svg}')
     .pipe(changed(pkg.paths.dist.img))
     .pipe(imagemin([
       imagemin.gifsicle({interlaced: true}),
@@ -87,7 +87,7 @@ gulp.task('images', function() {
 
 // Sprites task
 gulp.task('sprites', function() {
-  return gulp.src(pkg.globs.sprites)
+  return gulp.src(pkg.paths.src.sprites + '**/*.svg')
     .pipe(svgSprite({
       mode: {
         symbol: {
@@ -101,7 +101,7 @@ gulp.task('sprites', function() {
 
 // Fonts task
 gulp.task('fonts', function() {
-  return gulp.src(pkg.globs.fonts)
+  return gulp.src(pkg.paths.src.fonts + '**/*.{eot,ttf,woff,woff2}')
     .pipe(changed(pkg.paths.dist.fonts))
     .pipe(gulp.dest(pkg.paths.dist.fonts));
 })
@@ -123,12 +123,12 @@ gulp.task('watch', function() {
 	gulp.watch(pkg.paths.src.css + '**/*.scss', gulp.series('css'));
 	gulp.watch(pkg.paths.src.js + '**/*.js', gulp.series('js', reload));
 	gulp.watch([
-      pkg.paths.src.base + '**/*.{html,twig}',
+      pkg.paths.src.html + '**/*.{html,twig}',
       pkg.paths.src.base + pkg.vars.dataName
     ], gulp.series('html', reload));
-	gulp.watch(pkg.paths.src.img + '**/*', gulp.series('images'));
+	gulp.watch(pkg.paths.src.img + '**/*.{png,jpg,jpeg,gif,svg}', gulp.series('images'));
   gulp.watch(pkg.paths.src.sprites + '**/*.svg', gulp.series('sprites'));
-  gulp.watch(pkg.paths.src.fonts + '**/*', gulp.series('fonts'))
+  gulp.watch(pkg.paths.src.fonts + '**/*.{eot,ttf,woff,woff2}', gulp.series('fonts'))
 });
 
 
