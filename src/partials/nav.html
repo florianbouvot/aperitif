@@ -1,12 +1,12 @@
 <nav class="nav" role="navigation">
   <button class="nav__btn" id="js-nav-btn" type="button">
-    <svg aria-hidden="true">
+    <svg class="o-icon" aria-hidden="true">
       <use xlink:href="sprites/icons.svg#hamburger"></use>
     </svg>
     Menu
   </button>
 
-  <ul class="nav__list" id="js-nav-menu">
+  <ul class="nav__list o-list-bare" id="js-nav-menu">
     {% for item in nav %}
       <li class="nav__item">
         <a class="nav__link" href="{{ item.url }}">
