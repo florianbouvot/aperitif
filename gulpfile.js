@@ -71,7 +71,6 @@ gulp.task('js', function() {
 // HTML task
 gulp.task('html', function() {
   return gulp.src(pkg.paths.src.html + '*.{html,twig}')
-    .pipe(plumber())
     .pipe(data(getData()))
     .pipe(twig())
     .pipe(gulp.dest(pkg.paths.dist.html));
