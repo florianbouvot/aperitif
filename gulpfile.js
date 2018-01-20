@@ -63,8 +63,6 @@ gulp.task('js', function() {
 });
 
 // HTML task
-
-// Get data from JSON
 function getData() {
   var data = JSON.parse(fs.readFileSync(pkg.paths.src.base + pkg.vars.dataName, 'utf8'));
   return data;
