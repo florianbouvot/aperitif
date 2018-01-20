@@ -1,17 +1,16 @@
 // Requires
 var pkg = require('./package.json');
 var gulp = require('gulp');
-var autoprefixer = require('autoprefixer');
+var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var changed = require('gulp-changed');
 var concat = require('gulp-concat');
-var cssnano = require('cssnano');
+var cssnano = require('gulp-cssnano');
 var data = require('gulp-data');
 var del = require('del');
 var fs = require('fs');
 var imagemin = require('gulp-imagemin');
 var plumber = require('gulp-plumber');
-var postcss = require('gulp-postcss');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
@@ -35,17 +34,11 @@ function reload(done) {
 
 // CSS task
 gulp.task('css', function() {
-  var processors = [
-    autoprefixer(),
-    cssnano({
-      preset: 'default'
-    })
-  ];
-
   return gulp.src(pkg.paths.src.css + '**/*.scss')
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
-    .pipe(postcss(processors))
+    .pipe(autoprefixer())
+    .pipe(cssnano({ preset: 'default' }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(size({ gzip: true, showFiles: true }))
     .pipe(gulp.dest(pkg.paths.dist.css))
