@@ -28,6 +28,12 @@ function reload(done) {
   done();
 };
 
+// Get data for JSON
+function getData() {
+  var data = JSON.parse(fs.readFileSync(pkg.paths.src.base + pkg.vars.dataName, 'utf8'));
+  return data;
+};
+
 
 
 
@@ -56,11 +62,6 @@ gulp.task('js', function() {
 });
 
 // HTML task
-function getData() {
-  var data = JSON.parse(fs.readFileSync(pkg.paths.src.base + pkg.vars.dataName, 'utf8'));
-  return data;
-};
-
 gulp.task('html', function() {
   return gulp.src(pkg.paths.src.html + '*.{html,twig}')
     .pipe(data(getData()))
