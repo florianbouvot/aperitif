@@ -113,11 +113,8 @@ gulp.task('serve', function() {
   browserSync.init({
     server: pkg.urls.local
   });
-});
 
-// Watch task
-gulp.task('watch', function() {
-	gulp.watch(pkg.paths.src.css + '**/*.scss', gulp.series('css'));
+  gulp.watch(pkg.paths.src.css + '**/*.scss', gulp.series('css'));
 	gulp.watch(pkg.paths.src.js + '**/*.js', gulp.series('js', reload));
 	gulp.watch([
       pkg.paths.src.html + '**/*.{html,twig}',
@@ -136,7 +133,7 @@ gulp.task('watch', function() {
 gulp.task('default',
   gulp.series(
     gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts'),
-    gulp.parallel('serve', 'watch')
+    'serve'
   )
 );
 
