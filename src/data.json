@@ -1,6 +1,5 @@
 {
-  "title": "Nom du projet",
-  "description": "Description du projet",
+  "siteName": "Nom du projet",
   "nav": [
     {
       "title": "Accueil",

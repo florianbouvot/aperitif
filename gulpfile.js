@@ -28,6 +28,12 @@ function reload(done) {
   done();
 };
 
+// Get data for JSON
+function getData() {
+  var data = JSON.parse(fs.readFileSync(pkg.paths.src.base + pkg.vars.dataName, 'utf8'));
+  return data;
+};
+
 
 
 
@@ -56,11 +62,6 @@ gulp.task('js', function() {
 });
 
 // HTML task
-function getData() {
-  var data = JSON.parse(fs.readFileSync(pkg.paths.src.base + pkg.vars.dataName, 'utf8'));
-  return data;
-};
-
 gulp.task('html', function() {
   return gulp.src(pkg.paths.src.html + '*.{html,twig}')
     .pipe(data(getData()))
@@ -113,11 +114,8 @@ gulp.task('serve', function() {
   browserSync.init({
     server: pkg.urls.local
   });
-});
 
-// Watch task
-gulp.task('watch', function() {
-	gulp.watch(pkg.paths.src.css + '**/*.scss', gulp.series('css'));
+  gulp.watch(pkg.paths.src.css + '**/*.scss', gulp.series('css'));
 	gulp.watch(pkg.paths.src.js + '**/*.js', gulp.series('js', reload));
 	gulp.watch([
       pkg.paths.src.html + '**/*.{html,twig}',
@@ -136,7 +134,7 @@ gulp.task('watch', function() {
 gulp.task('default',
   gulp.series(
     gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts'),
-    gulp.parallel('serve', 'watch')
+    'serve'
   )
 );
 
