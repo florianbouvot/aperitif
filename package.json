@@ -10,10 +10,11 @@
     "jquery": "^3.3.1",
     "lazysizes": "^4.0.1",
     "normalize.css": "^8.0.0",
+    "sass-mq": "^4.0.2",
     "svg4everybody": "^2.1.9"
   },
   "devDependencies": {
-    "autoprefixer": "^7.2.6",
+    "autoprefixer": "^8.0.0",
     "browser-sync": "^2.23.6",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
@@ -74,7 +75,6 @@
   "globs": {
     "js": [
       "./node_modules/svg4everybody/dist/svg4everybody.min.js",
-      "./node_modules/jquery/dist/jquery.slim.min.js",
       "./src/js/main.js"
     ],
     "clean": [
