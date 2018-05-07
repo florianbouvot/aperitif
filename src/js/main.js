@@ -1,4 +1,4 @@
-/**
+/*
  * SVG for Everybody
  * https://github.com/jonathantneal/svg4everybody
  */
@@ -10,11 +10,13 @@ svg4everybody();
  * Toggle on/off nav on click
  */
 
-var navBtn = document.getElementById('js-nav-btn');
-var navMenu = document.getElementById('js-nav-menu');
+var nav = document.getElementById('nav');
+var navToggle = document.getElementById('navToggle');
 
-if (navBtn && navMenu) {
-  navBtn.onclick = function toggleMenu() {
-    navMenu.classList.toggle('is-expanded');
-  };
-};
+function toggleNav() {
+  nav.classList.toggle('is-open');
+}
+
+if (nav && navToggle) {
+  navToggle.addEventListener('click', toggleNav);
+}

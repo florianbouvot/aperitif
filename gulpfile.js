@@ -1,16 +1,17 @@
 // Requires
 var pkg = require('./package.json');
 var gulp = require('gulp');
-var autoprefixer = require('gulp-autoprefixer');
+var autoprefixer = require('autoprefixer');
 var browserSync = require('browser-sync').create();
 var changed = require('gulp-changed');
 var concat = require('gulp-concat');
-var cssnano = require('gulp-cssnano');
+var cssnano = require('cssnano');
 var data = require('gulp-data');
 var del = require('del');
 var fs = require('fs');
 var imagemin = require('gulp-imagemin');
 var plumber = require('gulp-plumber');
+var postcss = require('gulp-postcss');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
@@ -40,11 +41,15 @@ function getData() {
 
 // CSS task
 gulp.task('css', function() {
+  var plugins = [
+    autoprefixer(),
+    cssnano({ preset: 'default' })
+  ];
+
   return gulp.src(pkg.paths.src.css + '**/*.scss')
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(cssnano({ preset: 'default' }))
+    .pipe(postcss(plugins))
     .pipe(rename({ suffix: '.min' }))
     .pipe(size({ gzip: true, showFiles: true }))
     .pipe(gulp.dest(pkg.paths.dist.css))
@@ -71,7 +76,7 @@ gulp.task('html', function() {
 
 // Images task
 gulp.task('images', function() {
-  return gulp.src(pkg.paths.src.img + '**/*.{png,jpg,jpeg,gif,svg}')
+  return gulp.src(pkg.paths.src.img + '**/*')
     .pipe(changed(pkg.paths.dist.img))
     .pipe(imagemin([
       imagemin.gifsicle({interlaced: true}),
@@ -121,7 +126,7 @@ gulp.task('serve', function() {
       pkg.paths.src.html + '**/*.{html,twig}',
       pkg.paths.src.base + pkg.vars.dataName
     ], gulp.series('html', reload));
-	gulp.watch(pkg.paths.src.img + '**/*.{png,jpg,jpeg,gif,svg}', gulp.series('images'));
+	gulp.watch(pkg.paths.src.img + '**/*', gulp.series('images'));
   gulp.watch(pkg.paths.src.sprites + '**/*.svg', gulp.series('sprites'));
   gulp.watch(pkg.paths.src.fonts + '**/*.{eot,ttf,woff,woff2}', gulp.series('fonts'))
 });
