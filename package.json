@@ -28,7 +28,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.1",
     "gulp-size": "^3.0.0",
-    "gulp-svg-sprite": "^1.4.0",
+    "gulp-svg-symbols": "^3.1.1",
+    "gulp-svgo": "^1.5.4",
     "gulp-twig": "^1.2.0",
     "gulp-uglify": "^3.0.0"
   },
