@@ -15,7 +15,8 @@ var postcss = require('gulp-postcss');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
-var svgSprite = require('gulp-svg-sprite');
+var svgo = require('gulp-svgo');
+var svgSymbols = require('gulp-svg-symbols');
 var twig = require('gulp-twig');
 var uglify = require('gulp-uglify');
 
@@ -89,14 +90,9 @@ gulp.task('images', function() {
 // Sprites task
 gulp.task('sprites', function() {
   return gulp.src(pkg.paths.src.sprites + '**/*.svg')
-    .pipe(svgSprite({
-      mode: {
-        symbol: {
-          dest: '.',
-          sprite: pkg.vars.spriteName
-        }
-      }
-    }))
+    .pipe(svgo({ plugins: [{ removeViewBox: false }] }))
+    .pipe(svgSymbols({ templates: ['default-svg'] }))
+    .pipe(rename(pkg.vars.spriteName))
     .pipe(size({ gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.sprites));
 });
