@@ -7,14 +7,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "jquery": "^3.3.1",
-    "lazysizes": "^4.0.2",
     "normalize.css": "^8.0.0",
     "sass-mq": "^4.0.2",
     "svg4everybody": "^2.1.9"
   },
   "devDependencies": {
-    "autoprefixer": "^8.5.0",
+    "autoprefixer": "^8.5.1",
     "browser-sync": "^2.24.4",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
