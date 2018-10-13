@@ -101,7 +101,7 @@ gulp.task('images', function() {
 // Sprites task
 gulp.task('sprites', function() {
   return gulp.src(pkg.paths.src.sprites + '**/*.svg')
-    .pipe(svgo({ plugins: [{ removeViewBox: false }] }))
+    .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
     .pipe(rename(pkg.vars.spriteName))
     .pipe(size({ title: 'Sprites', gzip: true }))
