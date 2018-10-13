@@ -89,8 +89,10 @@ gulp.task('images', function() {
   return gulp.src(pkg.paths.src.img + '**/*')
     .pipe(changed(pkg.paths.dist.img))
     .pipe(imagemin([
-      imagemin.gifsicle({interlaced: true}),
-      imagemin.jpegtran({progressive: true})
+      imagemin.gifsicle({ interlaced: true }),
+      imagemin.jpegtran({ progressive: true }),
+      imagemin.optipng(),
+      imagemin.svgo()
     ]))
     .pipe(size({ title: 'Images', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.img));
