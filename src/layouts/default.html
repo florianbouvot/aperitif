@@ -1,8 +1,11 @@
 <!doctype html>
 <html lang="fr">
-{% include "../partials/head.html" %}
+<head>
+  {% block head %}
+    {% include "../partials/head.html" %}
+  {% endblock %}
+</head>
 <body>
-
   {% include "../partials/header.html" %}
 
   {% block content %}{% endblock %}
@@ -18,6 +21,5 @@
     ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
-
 </body>
 </html>
