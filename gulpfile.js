@@ -15,7 +15,7 @@ var postcss = require('gulp-postcss');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
-var svgo = require('gulp-svgo');
+var svgmin = require('gulp-svgmin');
 var svgSymbols = require('gulp-svg-symbols');
 var twig = require('gulp-twig');
 var uglify = require('gulp-uglify');
@@ -41,6 +41,15 @@ function getData() {
 
 
 // CSS task
+gulp.task('css-vendor', function() {
+  return gulp.src(pkg.globs.cssVendor)
+  .pipe(rename({
+    prefix: '_',
+    extname: '.scss'
+  }))
+  .pipe(gulp.dest(pkg.paths.src.css + 'vendor'))
+})
+
 gulp.task('css', function() {
   var plugins = [
     autoprefixer(),
@@ -52,7 +61,7 @@ gulp.task('css', function() {
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugins))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(size({ gzip: true, showFiles: true }))
+    .pipe(size({ title: 'CSS', gzip: true, showFiles: true }))
     .pipe(gulp.dest(pkg.paths.dist.css))
     .pipe(browserSync.stream());
 });
@@ -63,7 +72,7 @@ gulp.task('js', function() {
     .pipe(plumber())
     .pipe(concat(pkg.vars.jsName))
     .pipe(uglify())
-    .pipe(size({ gzip: true }))
+    .pipe(size({ title: 'JS', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.js));
 });
 
@@ -80,20 +89,22 @@ gulp.task('images', function() {
   return gulp.src(pkg.paths.src.img + '**/*')
     .pipe(changed(pkg.paths.dist.img))
     .pipe(imagemin([
-      imagemin.gifsicle({interlaced: true}),
-      imagemin.jpegtran({progressive: true})
+      imagemin.gifsicle({ interlaced: true }),
+      imagemin.jpegtran({ progressive: true }),
+      imagemin.optipng(),
+      imagemin.svgo()
     ]))
-    .pipe(size({ gzip: true }))
+    .pipe(size({ title: 'Images', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.img));
 });
 
 // Sprites task
 gulp.task('sprites', function() {
   return gulp.src(pkg.paths.src.sprites + '**/*.svg')
-    .pipe(svgo({ plugins: [{ removeViewBox: false }] }))
+    .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
     .pipe(rename(pkg.vars.spriteName))
-    .pipe(size({ gzip: true }))
+    .pipe(size({ title: 'Sprites', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.sprites));
 });
 
@@ -101,7 +112,7 @@ gulp.task('sprites', function() {
 gulp.task('fonts', function() {
   return gulp.src(pkg.paths.src.fonts + '**/*.{eot,ttf,woff,woff2}')
     .pipe(changed(pkg.paths.dist.fonts))
-    .pipe(size({ gzip: true }))
+    .pipe(size({ title: 'Fonts', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.fonts));
 })
 
@@ -134,6 +145,7 @@ gulp.task('serve', function() {
 // Default task
 gulp.task('default',
   gulp.series(
+    'css-vendor',
     gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts'),
     'serve'
   )
@@ -143,6 +155,7 @@ gulp.task('default',
 gulp.task('build',
   gulp.series(
     'clean',
+    'css-vendor',
     gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts')
   )
 );

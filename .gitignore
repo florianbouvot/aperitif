@@ -12,3 +12,4 @@ node_modules/
 
 # Project
 dist/
+src/css/vendor/

@@ -1,23 +1,25 @@
 <!doctype html>
-<html class="no-js" lang="fr">
-  {% include "../partials/head.html" %}
-  <body>
+<html lang="fr">
+<head>
+  {% block head %}
+    {% include "../partials/head.html" %}
+  {% endblock %}
+</head>
+<body>
+  {% include "../partials/header.html" %}
 
-    {% include "../partials/header.html" %}
+  {% block content %}{% endblock %}
 
-    {% block content %}{% endblock %}
+  {% include "../partials/footer.html" %}
 
-    {% include "../partials/footer.html" %}
+  {% block js %}
+    <script src="js/main.min.js" async></script>
+  {% endblock %}
 
-    {% block js %}
-      <script src="js/main.min.js" async defer></script>
-    {% endblock %}
-
-    <script>
-      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-      ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
-    </script>
-    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-
-  </body>
+  <script>
+    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+    ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
 </html>
