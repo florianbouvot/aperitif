@@ -72,6 +72,10 @@
     "dataName": "data.json"
   },
   "globs": {
+    "cssVendor": [
+      "./node_modules/cookieconsent/build/cookieconsent.min.css",
+      "./node_modules/normalize.css/normalize.css"
+    ],
     "js": [
       "./node_modules/svg4everybody/dist/svg4everybody.min.js",
       "./src/js/main.js"

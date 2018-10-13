@@ -15,7 +15,7 @@ var postcss = require('gulp-postcss');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
-var svgo = require('gulp-svgo');
+var svgmin = require('gulp-svgmin');
 var svgSymbols = require('gulp-svg-symbols');
 var twig = require('gulp-twig');
 var uglify = require('gulp-uglify');
@@ -41,6 +41,15 @@ function getData() {
 
 
 // CSS task
+gulp.task('css-vendor', function() {
+  return gulp.src(pkg.globs.cssVendor)
+  .pipe(rename({
+    prefix: '_',
+    extname: '.scss'
+  }))
+  .pipe(gulp.dest(pkg.paths.src.css + 'vendor'))
+})
+
 gulp.task('css', function() {
   var plugins = [
     autoprefixer(),
@@ -134,6 +143,7 @@ gulp.task('serve', function() {
 // Default task
 gulp.task('default',
   gulp.series(
+    'css-vendor',
     gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts'),
     'serve'
   )
@@ -143,6 +153,7 @@ gulp.task('default',
 gulp.task('build',
   gulp.series(
     'clean',
+    'css-vendor',
     gulp.parallel('css', 'js', 'html', 'images', 'sprites', 'fonts')
   )
 );
