@@ -2695,7 +2695,7 @@ gulp-svg-symbols@^3.2.0:
     through2 "^2.0.1"
     vinyl "^2.2.0"
 
-gulp-svgmin@^1.5.4:
+gulp-svgmin@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/gulp-svgmin/-/gulp-svgmin-2.1.0.tgz#0d8a585c5369d1e77273965a629afddf23e430ff"
   integrity sha512-Borxf8zucgfqF+bzJDz10YDkAS9zhKVHf/FhgHdjgD4+PnvyETCJWaeumg7j8ilCdAJsoMs8dS9TpHwI2hfbUQ==
