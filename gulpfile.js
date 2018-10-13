@@ -61,7 +61,7 @@ gulp.task('css', function() {
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss(plugins))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(size({ gzip: true, showFiles: true }))
+    .pipe(size({ title: 'CSS', gzip: true, showFiles: true }))
     .pipe(gulp.dest(pkg.paths.dist.css))
     .pipe(browserSync.stream());
 });
@@ -72,7 +72,7 @@ gulp.task('js', function() {
     .pipe(plumber())
     .pipe(concat(pkg.vars.jsName))
     .pipe(uglify())
-    .pipe(size({ gzip: true }))
+    .pipe(size({ title: 'JS', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.js));
 });
 
@@ -92,7 +92,7 @@ gulp.task('images', function() {
       imagemin.gifsicle({interlaced: true}),
       imagemin.jpegtran({progressive: true})
     ]))
-    .pipe(size({ gzip: true }))
+    .pipe(size({ title: 'Images', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.img));
 });
 
@@ -102,7 +102,7 @@ gulp.task('sprites', function() {
     .pipe(svgo({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
     .pipe(rename(pkg.vars.spriteName))
-    .pipe(size({ gzip: true }))
+    .pipe(size({ title: 'Sprites', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.sprites));
 });
 
@@ -110,7 +110,7 @@ gulp.task('sprites', function() {
 gulp.task('fonts', function() {
   return gulp.src(pkg.paths.src.fonts + '**/*.{eot,ttf,woff,woff2}')
     .pipe(changed(pkg.paths.dist.fonts))
-    .pipe(size({ gzip: true }))
+    .pipe(size({ title: 'Fonts', gzip: true }))
     .pipe(gulp.dest(pkg.paths.dist.fonts));
 })
 
