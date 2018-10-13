@@ -73,7 +73,6 @@
   },
   "globs": {
     "cssVendor": [
-      "./node_modules/cookieconsent/build/cookieconsent.min.css",
       "./node_modules/normalize.css/normalize.css"
     ],
     "js": [
