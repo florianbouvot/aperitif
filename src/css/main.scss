@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+/* purgecss start ignore */
+@tailwind base;
+/* purgecss end ignore */
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+  background-color: orange;
+  color: white;
+}

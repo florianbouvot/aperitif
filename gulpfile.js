@@ -2,187 +2,154 @@
 var {gulp, src, dest, watch, series, parallel} = require('gulp');
 var pkg = require('./package.json');
 var autoprefixer = require('autoprefixer');
-var browserSync = require('browser-sync').create();
+var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var concat = require('gulp-concat');
-var cssnano = require('cssnano');
-var data = require('gulp-data');
+var csso = require('gulp-csso');
 var del = require('del');
-var fs = require('fs');
 var imagemin = require('gulp-imagemin');
-var plumber = require('gulp-plumber');
 var postcss = require('gulp-postcss');
-var purgecss = require('@fullhuman/postcss-purgecss');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var size = require('gulp-size');
 var svgmin = require('gulp-svgmin');
 var svgSymbols = require('gulp-svg-symbols');
-var tailwindcss = require('tailwindcss');
-var twig = require('gulp-twig');
+var tailwind = require('tailwindcss');
 var uglify = require('gulp-uglify');
 
 
-// Get data for JSON
-function getData() {
-  var data = JSON.parse(fs.readFileSync(pkg.paths.src.base + pkg.vars.dataName, 'utf8'));
-  return data;
-};
+// Styles task
+var styles = function (done) {
+  // Make sure this feature is activated before running
+	if (!pkg.tasks.styles) return done();
 
-
-// CSS task
-function cssOptim() {
-  var plugins = [
-    purgecss({
-      content: pkg.globs.purgecssContent,
-      defaultExtractor: content => content.match(/[A-Za-z0-9-_:\/@\\]+/g) || [],
-      whitelist: pkg.globs.purgecssWhitelist
-    }),
-    cssnano({ preset: 'default' })
-  ];
-
-  return src(pkg.globs.purgecss)
-    .pipe(plumber())
-    .pipe(postcss(plugins))
+  return src(pkg.paths.styles.input)
+    .pipe(sass())
+    .pipe(postcss([
+      tailwind(),
+      autoprefixer(),
+    ]))
     .pipe(size({ title: 'CSS', gzip: true, showFiles: true }))
-    .pipe(dest(pkg.paths.dist.css));
-}
-
-function cssVendor() {
-  return src(pkg.globs.cssVendor)
-    .pipe(rename({
-      prefix: '_',
-      extname: '.scss'
-    }))
-    .pipe(dest(pkg.paths.src.css + 'vendor'));
-}
-
-function css() {
-  var plugins = [
-    tailwindcss(),
-    autoprefixer()
-  ];
-
-  return src(pkg.paths.src.css + '*.scss')
-    .pipe(plumber())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(postcss(plugins))
+    .pipe(dest(pkg.paths.styles.output))
     .pipe(rename({ suffix: '.min' }))
+    .pipe(csso())
     .pipe(size({ title: 'CSS', gzip: true, showFiles: true }))
-    .pipe(dest(pkg.paths.dist.css))
+    .pipe(dest(pkg.paths.styles.output))
     .pipe(browserSync.stream());
 }
 
 
-// JS task
-function js() {
-  return src(pkg.globs.js)
-    .pipe(plumber())
-    .pipe(concat(pkg.vars.jsName))
+// Scripts task
+var scripts = function (done) {
+  // Make sure this feature is activated before running
+	if (!pkg.tasks.scripts) return done();
+
+  return src(pkg.globs.scripts)
+    .pipe(concat(pkg.vars.scripts))
     .pipe(uglify())
     .pipe(size({ title: 'JS', gzip: true }))
-    .pipe(dest(pkg.paths.dist.js));
-}
-
-function jsRgpd() {
-  return src(pkg.globs.jsRgpd)
-    .pipe(plumber())
-    .pipe(concat(pkg.vars.jsRgpdName))
-    .pipe(uglify())
-    .pipe(size({ title: 'JS-RGPD', gzip: true }))
-    .pipe(dest(pkg.paths.dist.js));
+    .pipe(dest(pkg.paths.scripts.output));
 }
 
 
 // Images task
-function images() {
-  return src(pkg.paths.src.img + '**/*')
-    .pipe(changed(pkg.paths.dist.img))
+var images = function (done) {
+  // Make sure this feature is activated before running
+	if (!pkg.tasks.images) return done();
+
+  return src(pkg.paths.images.input)
+    .pipe(changed(pkg.paths.images.input))
     .pipe(imagemin([
       imagemin.gifsicle({ interlaced: true }),
-      imagemin.jpegtran({ progressive: true }),
+      imagemin.mozjpeg({ quality: 75 }),
       imagemin.optipng(),
       imagemin.svgo()
     ]))
     .pipe(size({ title: 'Images', gzip: true }))
-    .pipe(dest(pkg.paths.dist.img));
-}
-
-
-// Sprites task
-function sprites() {
-  return src(pkg.paths.src.sprites + '**/*.svg')
-    .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
-    .pipe(svgSymbols({ templates: ['default-svg'] }))
-    .pipe(rename(pkg.vars.spriteName))
-    .pipe(size({ title: 'Sprites', gzip: true }))
-    .pipe(dest(pkg.paths.dist.sprites));
+    .pipe(dest(pkg.paths.images.output));
 }
 
 
 // Fonts task
-function fonts() {
-  return src(pkg.paths.src.fonts + '**/*.{eot,ttf,woff,woff2}')
-    .pipe(changed(pkg.paths.dist.fonts))
-    .pipe(size({ title: 'Fonts', gzip: true }))
-    .pipe(dest(pkg.paths.dist.fonts));
-}
+var fonts = function (done) {
+  // Make sure this feature is activated before running
+	if (!pkg.tasks.fonts) return done();
 
-
-// HTML task
-function html() {
-  return src(pkg.paths.src.html + '*.{html,twig}')
-    .pipe(data(getData()))
-    .pipe(twig())
-    .pipe(dest(pkg.paths.dist.html));
+  return src(pkg.paths.fonts.input)
+    .pipe(changed(pkg.paths.fonts.input))
+    .pipe(dest(pkg.paths.fonts.output));
 }
 
 
 // Clean task
-function clean() {
-  return del(pkg.globs.clean);
+var clean = function (done) {
+  // Make sure this feature is activated before running
+	if (!pkg.tasks.clean) return done();
+
+	del.sync(
+    pkg.paths.clean
+  );
+
+	// Signal completion
+	return done();
 }
 
 
 // Server task
-function serve(cb) {
-  browserSync.init({
-    server: pkg.urls.local
-  });
+var startServer = function (done) {
+	// Make sure this feature is activated before running
+	if (!pkg.tasks.reload) return done();
 
-  watch(pkg.paths.src.css + '**/*.scss', series(css));
-	watch(pkg.paths.src.js + '**/*.js', series(parallel(js, jsRgpd), reload));
-	watch(pkg.paths.templates + '**/*.{html,twig}', series(reload));
-	watch(pkg.paths.src.img + '**/*', series(images));
-  watch(pkg.paths.src.sprites + '**/*.svg', series(sprites));
-  watch(pkg.paths.src.fonts + '**/*.{eot,ttf,woff,woff2}', series(fonts));
-  watch([
-    pkg.paths.src.html + '**/*.{html,twig}',
-    pkg.paths.src.base + pkg.vars.dataName
-  ], series(html, reload));
+	// Initialize BrowserSync
+	browserSync.init({
+    server: {
+			baseDir: pkg.paths.reload
+		}
+	});
 
-  cb();
-}
+	// Signal completion
+	done();
+};
 
-function reload(cb) {
+// Reload the browser when files change
+var reloadBrowser = function (done) {
+  // Make sure this feature is activated before running
+  if (!pkg.tasks.reload) return done();
+
   browserSync.reload();
 
-  cb();
-}
+  // Signal completion
+  done();
+};
+
+// Watch for changes
+var watchSource = function (done) {
+	// Make sure this feature is activated before running
+  if (!pkg.tasks.reload) return done();
+
+  watch(pkg.paths.styles.input, series(styles));
+  watch(pkg.paths.tailwind, series(styles));
+  //watch(pkg.paths.scripts.input + '**/*.js', series(parallel(scripts), reloadBrowser));
+  watch(pkg.paths.images.input, series(images));
+  watch(pkg.paths.fonts.input, series(fonts));
+  watch(pkg.paths.templates, series(reloadBrowser));
+
+  // Signal completion
+  done();
+};
 
 
 // Default task
 exports.default = series(
-  cssVendor,
-  parallel(css, js, jsRgpd, images, sprites, fonts, html),
-  serve
+  clean,
+  parallel(styles, images, fonts),
+  startServer,
+	watchSource
 );
 
 
 // Build task
 exports.build = series(
   clean,
-  cssVendor,
-  parallel(css, js, jsRgpd, images, sprites, fonts, html),
-  cssOptim
+  parallel(styles, images, fonts)
 );
